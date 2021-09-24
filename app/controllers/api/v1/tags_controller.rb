@@ -1,6 +1,7 @@
 module Api
     module V1
-        class TagsController < ApplicationController
+        class TagsController < ApplicationController        
+            skip_before_action :authenticate
             def index
                 tags = Tag.order('created_at DESC')
                 render json: {
