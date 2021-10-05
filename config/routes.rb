@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace 'v1' do
       resources :tags
       resources :users
+      resources :questions
       post 'login', to: 'authentication#login'
     end
   end
