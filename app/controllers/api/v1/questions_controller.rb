@@ -1,6 +1,7 @@
 module Api
     module V1
-        class QuestionsController < ApplicationController
+        class QuestionsController < ApplicationController 
+            skip_before_action :authenticate, only: [:show]
             def show
               question = Question.includes(:question_tag).where(id: params[:id]).first
               views = question.views ? question.views : 0
