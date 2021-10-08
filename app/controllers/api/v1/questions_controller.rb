@@ -3,7 +3,8 @@ module Api
         class QuestionsController < ApplicationController 
             skip_before_action :authenticate, only: [:show]
             def show
-              question = Question.includes(:question_tag).where(id: params[:id]).first
+              question = Question.includes(:question_tag, :answers)
+                                 .where(id: params[:id]).first
               views = question.views ? question.views : 0
               question.update(views: views + 1)
               render json: { 
@@ -12,7 +13,8 @@ module Api
                 content: question.content,
                 views: question.views,
                 rating: question.rating,
-                tags: question.question_tag
+                tags: question.question_tag,
+                answers: question.answers
               }
             end
             def create
