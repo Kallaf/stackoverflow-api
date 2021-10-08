@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :questions
       post '/rate_question/:question_id', to: 'question_ratings#rate_question'
       post '/answer_question/:question_id', to: 'answers#answer_question'
+      post '/rate_answer/:answer_id', to: 'answer_ratings#rate_answer'
       post '/login', to: 'authentication#login'
     end
   end

@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_07_233017) do
+ActiveRecord::Schema.define(version: 2021_10_08_000626) do
+
+  create_table "answer_ratings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "answer_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "rating"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["answer_id"], name: "index_answer_ratings_on_answer_id"
+    t.index ["user_id", "answer_id"], name: "index_answer_ratings_on_user_id_and_answer_id", unique: true
+    t.index ["user_id"], name: "index_answer_ratings_on_user_id"
+  end
 
   create_table "answers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "question_id", null: false
@@ -67,6 +78,8 @@ ActiveRecord::Schema.define(version: 2021_10_07_233017) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "answer_ratings", "answers"
+  add_foreign_key "answer_ratings", "users"
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
   add_foreign_key "question_ratings", "questions"
