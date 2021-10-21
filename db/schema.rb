@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2021_10_08_000626) do
 
-  create_table "answer_ratings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "answer_ratings", force: :cascade do |t|
     t.bigint "answer_id", null: false
     t.bigint "user_id", null: false
     t.integer "rating"
@@ -23,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_000626) do
     t.index ["user_id"], name: "index_answer_ratings_on_user_id"
   end
 
-  create_table "answers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "answers", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.bigint "user_id", null: false
     t.string "content"
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_000626) do
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
-  create_table "question_ratings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "question_ratings", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.bigint "user_id", null: false
     t.integer "rating"
@@ -45,7 +48,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_000626) do
     t.index ["user_id"], name: "index_question_ratings_on_user_id"
   end
 
-  create_table "question_tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "question_tags", force: :cascade do |t|
     t.bigint "question_id", null: false
     t.bigint "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -54,7 +57,7 @@ ActiveRecord::Schema.define(version: 2021_10_08_000626) do
     t.index ["tag_id"], name: "index_question_tags_on_tag_id"
   end
 
-  create_table "questions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "questions", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
     t.string "content"
@@ -65,13 +68,13 @@ ActiveRecord::Schema.define(version: 2021_10_08_000626) do
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
-  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
