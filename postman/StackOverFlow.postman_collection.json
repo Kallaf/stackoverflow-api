@@ -1,0 +1,893 @@
+{
+	"info": {
+		"_postman_id": "1aa48de1-26e6-4812-af84-37ef9fb1aad3",
+		"name": "StackOverFlow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Tags",
+			"item": [
+				{
+					"name": "Get all tags",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rails-host}}/api/v1/tags",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get tag by id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rails-host}}/api/v1/tags/1",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"tags",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create user1",
+			"item": [
+				{
+					"name": "Sign up",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"email\", pm.variables.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"response has the same email\", function () {\r",
+									"  pm.expect(jsonData).to.be.an(\"object\");\r",
+									"  pm.expect(jsonData.email).to.be.eq(pm.collectionVariables.get(\"email\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rails-host}}/api/v1/users",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response has a token\", function () {\r",
+									"    pm.expect(jsonData).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set(\"token1\", jsonData.token);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rails-host}}/api/v1/login",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create user2",
+			"item": [
+				{
+					"name": "Sign up",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"email\", pm.variables.replaceIn(\"{{$randomEmail}}\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"response has the same email\", function () {\r",
+									"  pm.expect(jsonData).to.be.an(\"object\");\r",
+									"  pm.expect(jsonData.email).to.be.eq(pm.collectionVariables.get(\"email\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rails-host}}/api/v1/users",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Response has a token\", function () {\r",
+									"    pm.expect(jsonData).to.have.property('token');\r",
+									"});\r",
+									"\r",
+									"pm.collectionVariables.set(\"token2\", jsonData.token);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rails-host}}/api/v1/login",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Questions",
+			"item": [
+				{
+					"name": "Add question",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"questionTitle\", pm.variables.replaceIn(\"{{$randomLoremWords}}\"));\r",
+									"pm.collectionVariables.set(\"questionContent\", pm.variables.replaceIn(\"{{$randomLoremSentence}}\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"    pm.collectionVariables.set(\"LAST_VIEW_COUNT\", 0);\r",
+									"});\r",
+									"\r",
+									"var question = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Question has id\", function () {\r",
+									"    pm.expect(question).to.have.property(\"id\");\r",
+									"    if (question.id) {\r",
+									"        pm.collectionVariables.set(\"QUESTION_ID\", question.id);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Question has valid title\", function () {\r",
+									"    pm.expect(question).to.have.property(\"title\");\r",
+									"    pm.expect(question.title).to.eq(pm.collectionVariables.get(\"questionTitle\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Question has valid content\", function () {\r",
+									"    pm.expect(question).to.have.property(\"content\");\r",
+									"    pm.expect(question.content).to.eq(pm.collectionVariables.get(\"questionContent\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Question has valid tags\", function () {\r",
+									"    pm.expect(question.questionTags.length).to.greaterThan(0);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"{{questionTitle}}\",\r\n    \"content\": \"{{questionContent}}\",\r\n    \"tags\": [{\"id\": 3},{\"id\": 2}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rails-host}}/api/v1/questions",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"questions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upvote question",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 1 \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rails-host}}/api/v1/rate_question/{{QUESTION_ID}}",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rate_question",
+								"{{QUESTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Downvote question",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": -1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rails-host}}/api/v1/rate_question/{{QUESTION_ID}}",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rate_question",
+								"{{QUESTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Answer question",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.collectionVariables.set(\"answerContent\", pm.variables.replaceIn(\"{{$randomLoremSentence}}\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"var answer = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Answer has id\", function () {\r",
+									"    pm.expect(answer).to.have.property(\"id\");\r",
+									"    if (answer.id) {\r",
+									"        pm.collectionVariables.set(\"ANSWER_ID\", answer.id);\r",
+									"    }\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Answer has valid content\", function () {\r",
+									"    pm.expect(answer).to.have.property(\"content\");\r",
+									"    pm.expect(answer.content).to.eq(pm.collectionVariables.get(\"answerContent\"));\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"{{answerContent}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rails-host}}/api/v1/answer_question/{{QUESTION_ID}}",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"answer_question",
+								"{{QUESTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upvote answer",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token1}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 1 \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{rails-host}}/api/v1/rate_answer/{{ANSWER_ID}}",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rate_answer",
+								"{{ANSWER_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get question",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var question = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Question has id\", function () {\r",
+									"    pm.expect(question).to.have.property(\"id\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Question has valid title\", function () {\r",
+									"    pm.expect(question).to.have.property(\"title\");\r",
+									"    pm.expect(question.title).to.eq(pm.collectionVariables.get(\"questionTitle\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Question has valid content\", function () {\r",
+									"    pm.expect(question).to.have.property(\"content\");\r",
+									"    pm.expect(question.content).to.eq(pm.collectionVariables.get(\"questionContent\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Question has valid view count\", function () {\r",
+									"    var expectViews = pm.collectionVariables.get(\"LAST_VIEW_COUNT\") + 1;\r",
+									"    pm.expect(question.views).to.eq(expectViews);\r",
+									"    pm.collectionVariables.set(\"LAST_VIEW_COUNT\", expectViews);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rails-host}}/api/v1/questions/{{QUESTION_ID}}",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"questions",
+								"{{QUESTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search for question by title",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"response has data\", function () {\r",
+									"    pm.expect(response).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"result is not empty\", function () {\r",
+									"    if(response.data) {    \r",
+									"        pm.expect(response.data.length).to.gt(0);\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rails-host}}/api/v1/search/\"{{questionTitle}}\"",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"search",
+								"\"{{questionTitle}}\""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search for question by content",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"response has data\", function () {\r",
+									"    pm.expect(response).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"result is not empty\", function () {\r",
+									"    if(response.data) {    \r",
+									"        pm.expect(response.data.length).to.gt(0);\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rails-host}}/api/v1/search/\"{{questionContent}}\"",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"search",
+								"\"{{questionContent}}\""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "password",
+			"value": "1234"
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "questionContent",
+			"value": ""
+		},
+		{
+			"key": "questionTitle",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "QUESTION_ID",
+			"value": ""
+		},
+		{
+			"key": "LAST_VIEW_COUNT",
+			"value": ""
+		},
+		{
+			"key": "questionTags",
+			"value": ""
+		},
+		{
+			"key": "token1",
+			"value": ""
+		},
+		{
+			"key": "token2",
+			"value": ""
+		},
+		{
+			"key": "answerContent",
+			"value": ""
+		},
+		{
+			"key": "ANSWER_ID",
+			"value": ""
+		}
+	]
+}
