@@ -4,9 +4,13 @@ module Api
             skip_before_action :authenticate, only: [:search]
             def search
                 search_text = params[:search_text]
-                
                 if search_text
-                    questions = Question.search_questions(search_text)
+                    query = {
+                        search_text: search_text,
+                        pageNumber: params[:pageNumber] ? params[:pageNumber] : 0 ,
+                        pageSize: params[:pageSize] ? params[:pageSize] : Question.max_page_size               
+                    }
+                    questions = Question.search_questions(query)
                     render json: {
                         status:'SUCCESS',  
                         data:questions

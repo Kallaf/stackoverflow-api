@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       post '/answer_question/:question_id', to: 'answers#answer_question'
       post '/rate_answer/:answer_id', to: 'answer_ratings#rate_answer'
       post '/login', to: 'authentication#login'
-      get '/search/:search_text', to: 'search#search'
+      get '/search', to: 'search#search'
     end
   end
 end

@@ -755,15 +755,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{rails-host}}/api/v1/search/\"{{questionTitle}}\"",
+							"raw": "{{rails-host}}/api/v1/search?search_text={{questionTitle}}",
 							"host": [
 								"{{rails-host}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"search",
-								"\"{{questionTitle}}\""
+								"search"
+							],
+							"query": [
+								{
+									"key": "search_text",
+									"value": "{{questionTitle}}"
+								}
 							]
 						}
 					},
@@ -803,15 +808,89 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{rails-host}}/api/v1/search/\"{{questionContent}}\"",
+							"raw": "{{rails-host}}/api/v1/search?search_text={{questionContent}}&pageNumber=0&pageSize=1",
 							"host": [
 								"{{rails-host}}"
 							],
 							"path": [
 								"api",
 								"v1",
-								"search",
-								"\"{{questionContent}}\""
+								"search"
+							],
+							"query": [
+								{
+									"key": "search_text",
+									"value": "{{questionContent}}"
+								},
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search for question by answer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"response has data\", function () {\r",
+									"    pm.expect(response).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"result is not empty\", function () {\r",
+									"    if(response.data) {    \r",
+									"        pm.expect(response.data.length).to.gt(0);\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rails-host}}/api/v1/search?search_text={{answerContent}}&pageNumber=0&pageSize=1",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"search"
+							],
+							"query": [
+								{
+									"key": "search_text",
+									"value": "{{answerContent}}"
+								},
+								{
+									"key": "pageNumber",
+									"value": "0"
+								},
+								{
+									"key": "pageSize",
+									"value": "1"
+								}
 							]
 						}
 					},
