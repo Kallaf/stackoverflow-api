@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       post '/rate_answer/:answer_id', to: 'answer_ratings#rate_answer'
       post '/login', to: 'authentication#login'
       get '/search', to: 'search#search'
+      get '/trend', to: 'questions#trend'
     end
   end
 end

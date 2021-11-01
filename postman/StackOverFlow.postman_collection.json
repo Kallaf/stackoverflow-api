@@ -895,6 +895,49 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Get trending questions",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"var response = pm.response.json();\r",
+									"\r",
+									"pm.test(\"result is not empty\", function () {\r",
+									"    if(response) {    \r",
+									"        pm.expect(response.length).to.gt(0);\r",
+									"    }\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{rails-host}}/api/v1/trend",
+							"host": [
+								"{{rails-host}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"trend"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

@@ -43,3 +43,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'jwt'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
+gem 'whenever', require: false
+gem 'redis'
+gem 'redis-namespace'
+gem 'redis-rails'
