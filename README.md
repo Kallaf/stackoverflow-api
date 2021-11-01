@@ -15,15 +15,17 @@ A simple server that allow adding, editing, deleting and searching for questions
 ## How to run
 - Make sure to install Docker and Docker compose.
 - Run the following commands
-`cd server`
-`docker-compose build`
-`docker-compose run --rm web rails db:create db:migrate db:seed`
-`docker-compose up`
-
+```
+cd server
+docker-compose build
+docker-compose run --rm web rails db:create db:migrate db:seed
+docker-compose up
+```
 
 ## API testing
 - To test every thing is working we can test it using postman tests, so we need to use newman to run postman tests (Make sure to install newman).
 - Run this commands 
-
-`cd postman`
-`newman run StackOverFlow.postman_collection.json -e local.postman_environment.json`
+```
+cd postman
+newman run StackOverFlow.postman_collection.json -e local.postman_environment.json
+```
