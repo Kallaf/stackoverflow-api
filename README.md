@@ -23,7 +23,7 @@ docker-compose up
 ```
 
 ## API testing
-- To test every thing is working we can test it using postman tests, so we need to use newman to run postman tests (Make sure to install newman).
+- To test every thing is working fine, We can use newman to run postman tests. (Make sure to install newman).
 - Run this commands 
 ```
 cd postman
